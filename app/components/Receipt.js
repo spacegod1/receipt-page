@@ -5,6 +5,7 @@ import giftBox from "../../public/gift-box.png";
 import { MdOutlineLocationSearching } from "react-icons/md";
 import { TfiFaceSmile } from "react-icons/tfi";
 import { VscReport } from "react-icons/vsc";
+import { FaCircleCheck } from "react-icons/fa6";
 
 export default function Receipt() {
   return (
@@ -47,7 +48,10 @@ export default function Receipt() {
         </div>
         <div className="flex justify-between items-center">
           <h3>Status</h3>
-          <div className="">Success</div>
+          <div className="flex justify-center items-center py-1 rounded-md gap-1 w-[6rem] bg-[#00cc8e] text-white">
+            <FaCircleCheck />
+            <h3>Success</h3>
+          </div>
         </div>
         <div className="mt-6 text-[0.835rem]">
           <table className="w-full">
