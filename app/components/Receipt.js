@@ -50,7 +50,7 @@ export default function Receipt() {
           <h3>Status</h3>
           <div className="flex justify-center items-center py-1 rounded-md gap-1 w-[6rem] bg-[#00cc8e] text-white">
             <FaCircleCheck />
-            <h3>Success</h3>
+            <h3 className="text-[14px]">Success</h3>
           </div>
         </div>
         <div className="mt-6 text-[0.835rem]">
