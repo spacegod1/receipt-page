@@ -1,10 +1,6 @@
 import Image from "next/image";
 import Logo from "../../public/emergent_logo.png";
 import Name from "../../public/emergent_name.png";
-// import giftBox from "../../public/gift-box.png";
-// import { MdOutlineLocationSearching } from "react-icons/md";
-// import { TfiFaceSmile } from "react-icons/tfi";
-// import { VscReport } from "react-icons/vsc";
 import { FaCircleCheck } from "react-icons/fa6";
 
 export default function Receipt() {
@@ -80,18 +76,7 @@ export default function Receipt() {
                 <td></td>
                 <td className="text-right">GHS 404.00</td>
               </tr>
-              <tr className="border-y">
-                {/* <td className="flex flex-row items-center gap-1">
-                  <Image
-                    src={giftBox}
-                    alt="gift-box"
-                    className="h-[2rem] w-[2rem]"
-                  />{" "}
-                  <h2>Reward Points</h2>
-                </td>
-                <td></td>
-                <td className="text-right">0 gpts</td> */}
-              </tr>
+              <tr className="border-y"></tr>
             </tfoot>
           </table>
         </div>
