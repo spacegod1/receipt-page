@@ -65,9 +65,9 @@ export default function Home() {
             </div>
             <div>
               <div className="text-right">
-                <p>{transData.trans_ref_no}</p>
-                <p>{transData.mobile}</p>
-                <p>{transData.name}</p>
+                <p>{transData.trans_ref_no || "receipt#"}</p>
+                <p>{transData.mobile || "0530000001"}</p>
+                <p>{transData.name || "Daniel Amoako"}</p>
               </div>
             </div>
           </div>
@@ -90,7 +90,7 @@ export default function Home() {
               <tbody className="text-center">
                 <tr>
                   <td className="text-left"></td>
-                  <td>{transData.payment_mode}</td>
+                  <td>{transData.payment_mode || "MTN"}</td>
                   <td className="text-right">Paid</td>
                 </tr>
               </tbody>
@@ -98,13 +98,14 @@ export default function Home() {
                 <tr className="text-left">
                   <td>SubTotal</td>
                   <td></td>
-                  <td className="text-right">GHS {transData.email}</td>
+                  <td className="text-right">GHS {transData.email || "20"}</td>
                 </tr>
                 <tr className="text-[22px] font-semibold">
                   <td className="text-left">Total</td>
                   <td></td>
                   <td className="text-right">
-                    <span className="text-[17px]">GHS</span> {transData.email}
+                    <span className="text-[17px]">GHS</span>{" "}
+                    {transData.email || "20"}
                   </td>
                 </tr>
                 <tr className="border-y"></tr>
