@@ -1,15 +1,25 @@
+"use client";
+
 import Image from "next/image";
 import Logo from "../../public/emergent_logo.png";
 import Name from "../../public/emergent_name.png";
 import { FaCircleCheck } from "react-icons/fa6";
+import { useEffect } from "react";
 
 export default function Receipt() {
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch("/api");
+      console.log(response);
+    }
+  }, []);
+
   return (
     <section className="flex flex-col justify-center items-center px-2">
       <main className="bg-white p-4 w-auto mt-[5rem] md:w-[30rem] shadow-2xl flex flex-col justify-center border">
         <div className="flex justify-between">
           <div>
-            <h2 className="font-semibold text-[1.3rem]">Onyame Ent.</h2>
+            <h2 className="font-semibold text-[1.3rem]">EP Test Ent.</h2>
             <p>0540000001</p>
             <p>July 25th 2024, 10:03:19 pm</p>
           </div>
@@ -62,7 +72,7 @@ export default function Receipt() {
               <tr>
                 <td className="text-left"></td>
                 <td>Paid via *789*5*0#</td>
-                <td className="text-right">GHS 400.00</td>
+                <td className="text-right">Paid</td>
               </tr>
             </tbody>
             <tfoot className="w-full text-center">
