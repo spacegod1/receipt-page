@@ -1,24 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import Logo from "../../public/emergent_logo.png";
-import Name1 from "../../public/emergent_name.png";
+
+import Logo from "../../../public/emergent_logo.png";
+import Name1 from "../../../public/emergent_name.png";
 import { FaCircleCheck } from "react-icons/fa6";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function Receipt() {
+export default function Product({ params }) {
   const searchParams = useSearchParams();
-
-  useEffect(() => {
-    async function fetchData() {
-      const apiUrl = `https://receipt.emergentsms.com${searchParams.toString()}`;
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-      setTransData(data);
-    }
-  }, [searchParams]);
-
   const [transData, setTransData] = useState({
     trans_ref_no: "",
     name: "",
@@ -28,6 +19,9 @@ export default function Receipt() {
     payment_mode: "",
   });
 
+  console.log("PassedParams", searchParams.get("name"));
+
+  console.log(params);
   return (
     <section className="flex flex-col justify-center items-center px-2">
       <main className="bg-white p-4 w-auto mt-[5rem] md:w-[30rem] shadow-2xl flex flex-col justify-center border">

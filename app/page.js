@@ -21,6 +21,7 @@ export default function Home() {
     if (searchParams.toString()) {
       fetchData();
     }
+    // console.log(searchParams);
   }, [searchParams]);
 
   const [transData, setTransData] = useState({
