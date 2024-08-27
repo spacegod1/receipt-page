@@ -10,20 +10,6 @@ import { useSearchParams } from "next/navigation";
 export default function Home() {
   const searchParams = useSearchParams();
 
-  useEffect(() => {
-    async function fetchData() {
-      const apiUrl = `https://receipt.emergentsms.com${searchParams.toString()}`;
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-      setTransData(data);
-    }
-
-    if (searchParams.toString()) {
-      fetchData();
-    }
-    // console.log(searchParams);
-  }, [searchParams]);
-
   const [transData, setTransData] = useState({
     trans_ref_no: "",
     name: "",
@@ -32,6 +18,21 @@ export default function Home() {
     status_code: "",
     payment_mode: "",
   });
+
+  useEffect(() => {
+    setTransData(() => {
+      return {
+        name: searchParams.get("name"),
+        email: searchParams.get("email"),
+        mobile: searchParams.get("mobile"),
+        payment_mode: searchParams.get("payment_mode"),
+        status_code: searchParams.get("status_code"),
+        trans_ref_no: searchParams.get("trans_ref_no"),
+      };
+    });
+
+    console.log(transData);
+  }, []);
 
   return (
     <main className="flex justify-center items-center">
@@ -66,9 +67,9 @@ export default function Home() {
             </div>
             <div>
               <div className="text-right">
-                <p>{transData.trans_ref_no || "receipt#"}</p>
-                <p>{transData.mobile || "0530000001"}</p>
-                <p>{transData.name || "Daniel Amoako"}</p>
+                <p>{transData.trans_ref_no || ""}</p>
+                <p>{transData.mobile || ""}</p>
+                <p>{transData.name || ""}</p>
               </div>
             </div>
           </div>
@@ -91,7 +92,7 @@ export default function Home() {
               <tbody className="text-center">
                 <tr>
                   <td className="text-left"></td>
-                  <td>{transData.payment_mode || "MTN"}</td>
+                  <td>{transData.payment_mode || ""}</td>
                   <td className="text-right">Paid</td>
                 </tr>
               </tbody>
@@ -99,14 +100,14 @@ export default function Home() {
                 <tr className="text-left">
                   <td>SubTotal</td>
                   <td></td>
-                  <td className="text-right">GHS {transData.email || "20"}</td>
+                  <td className="text-right">GHS {transData.email || ""}</td>
                 </tr>
                 <tr className="text-[22px] font-semibold">
                   <td className="text-left">Total</td>
                   <td></td>
                   <td className="text-right">
                     <span className="text-[17px]">GHS</span>{" "}
-                    {transData.email || "20"}
+                    {transData.email || ""}
                   </td>
                 </tr>
                 <tr className="border-y"></tr>
