@@ -2,17 +2,31 @@
 
 import Image from "next/image";
 import Logo from "../../public/emergent_logo.png";
-import Name from "../../public/emergent_name.png";
+import Name1 from "../../public/emergent_name.png";
 import { FaCircleCheck } from "react-icons/fa6";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function Receipt() {
+  const searchParams = useSearchParams();
+
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("/api");
-      console.log(response);
+      const apiUrl = `https://receipt.emergentsms.com${searchParams.toString()}`;
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      setTransData(data);
     }
-  }, []);
+  }, [searchParams]);
+
+  const [transData, setTransData] = useState({
+    trans_ref_no: "",
+    name: "",
+    email: "",
+    mobile: "",
+    status_code: "",
+    payment_mode: "",
+  });
 
   return (
     <section className="flex flex-col justify-center items-center px-2">
@@ -31,7 +45,7 @@ export default function Receipt() {
               priority
             />
             <Image
-              src={Name}
+              src={Name1}
               className="h-[2.2rem] w-[4.7rem]"
               alt="Emergent Payment brand name"
               priority
@@ -46,9 +60,9 @@ export default function Receipt() {
           </div>
           <div>
             <div className="text-right">
-              <p>2337766578887_88776</p>
-              <p>2335530000001</p>
-              <p>DANIEL AMOAKO</p>
+              <p>{transData.trans_ref_no}</p>
+              <p>{transData.mobile}</p>
+              <p>{transData.name}</p>
             </div>
           </div>
         </div>
@@ -71,7 +85,7 @@ export default function Receipt() {
             <tbody className="text-center">
               <tr>
                 <td className="text-left"></td>
-                <td>Paid via *789*5*0#</td>
+                <td>{transData.payment_mode}</td>
                 <td className="text-right">Paid</td>
               </tr>
             </tbody>
@@ -79,12 +93,14 @@ export default function Receipt() {
               <tr className="text-left">
                 <td>SubTotal</td>
                 <td></td>
-                <td className="text-right">GHS 400.00</td>
+                <td className="text-right">GHS {transData.email}</td>
               </tr>
               <tr className="text-[22px] font-semibold">
                 <td className="text-left">Total</td>
                 <td></td>
-                <td className="text-right">GHS 404.00</td>
+                <td className="text-right">
+                  <span className="text-[17px]">GHS</span> {transData.email}
+                </td>
               </tr>
               <tr className="border-y"></tr>
             </tfoot>
