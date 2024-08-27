@@ -34,7 +34,7 @@ export default function Receipt() {
         <div className="flex justify-between">
           <div>
             <h2 className="font-semibold text-[1.3rem]">EP Test Ent.</h2>
-            <p>0540000001</p>
+            <p>0540000002</p>
             <p>July 25th 2024, 10:03:19 pm</p>
           </div>
           <div className="flex p-2">
