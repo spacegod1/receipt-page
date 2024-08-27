@@ -17,6 +17,10 @@ export default function Home() {
       const data = await response.json();
       setTransData(data);
     }
+
+    if (searchParams.toString()) {
+      fetchData();
+    }
   }, [searchParams]);
 
   const [transData, setTransData] = useState({
