@@ -10,12 +10,12 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const Loading = () => (
-    <div className="flex items-center justify-center">Loading</div>
-  );
+  // const Loading = () => (
+  //   <div className="flex items-center justify-center">Loading</div>
+  // );
   return (
     <html lang="en">
-      <Suspense fallback={<Loading />}>
+      <Suspense>
         <body className={inter.className}>{children}</body>
       </Suspense>
     </html>
