@@ -17,6 +17,7 @@ export default function Home() {
     mobile: "",
     status_code: "",
     payment_mode: "",
+    date: "",
   });
 
   useEffect(() => {
@@ -28,11 +29,52 @@ export default function Home() {
         payment_mode: searchParams.get("payment_mode"),
         status_code: searchParams.get("status_code"),
         trans_ref_no: searchParams.get("trans_ref_no"),
+        date: setDate(),
       };
     });
-
-    console.log(transData);
   }, []);
+
+  const setDate = function () {
+    const newDate = new Date();
+    const year = newDate.getFullYear();
+
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const month = monthNames[newDate.getMonth()];
+
+    const day = newDate.getDate();
+    const daySuffix =
+      day % 10 === 1 && day !== 11
+        ? "st"
+        : day % 10 === 2 && day !== 12
+        ? "nd"
+        : day % 10 === 3 && day !== 13
+        ? "rd"
+        : "th";
+
+    let hours = newDate.getHours();
+    const minutes = String(newDate.getMinutes()).padStart(2, "0");
+
+    const ampm = hours >= 12 ? "pm" : "am";
+    hours = hours % 12 || 12; // Convert to 12-hour format
+    hours = String(hours).padStart(2, "0");
+
+    const dateFormatString = `${month} ${day}${daySuffix} ${year}, ${hours}:${minutes} ${ampm}`;
+
+    return dateFormatString;
+  };
 
   return (
     <main className="flex justify-center items-center">
@@ -42,7 +84,7 @@ export default function Home() {
             <div>
               <h2 className="font-semibold text-[1.3rem]">EP Test Ent.</h2>
               <p>0540000002</p>
-              <p>July 25th 2024, 10:03:19 pm</p>
+              <p>{transData.date}</p>
             </div>
             <div className="flex p-2">
               <Image
