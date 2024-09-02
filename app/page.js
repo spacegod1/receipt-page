@@ -19,6 +19,7 @@ export default function Home() {
     payment_mode: "",
     date: "",
     merchant: "",
+    email: "",
   });
 
   useEffect(() => {
@@ -27,6 +28,7 @@ export default function Home() {
         name: searchParams.get("name"),
         amount: searchParams.get("amount"),
         mobile: searchParams.get("mobile"),
+        email: searchParams.get("email"),
         payment_mode: searchParams.get("payment_mode"),
         status_code: searchParams.get("status_code"),
         trans_ref_no: searchParams.get("trans_ref_no"),
@@ -130,14 +132,14 @@ export default function Home() {
             <table className="w-full">
               <thead className="border-y">
                 <tr>
-                  <th className="text-left"></th>
+                  <th className="text-left">Type</th>
                   <th>Description</th>
                   <th className="text-right">Amount</th>
                 </tr>
               </thead>
               <tbody className="text-center">
                 <tr>
-                  <td className="text-left"></td>
+                  <td className="text-left">{transData.email || ""}</td>
                   <td>{transData.payment_mode || ""}</td>
                   <td className="text-right">Paid</td>
                 </tr>
