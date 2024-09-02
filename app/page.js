@@ -18,6 +18,7 @@ export default function Home() {
     status_code: "",
     payment_mode: "",
     date: "",
+    merchant: "",
   });
 
   useEffect(() => {
@@ -30,6 +31,7 @@ export default function Home() {
         status_code: searchParams.get("status_code"),
         trans_ref_no: searchParams.get("trans_ref_no"),
         date: setDate(),
+        merchant: searchParams.get("merchant"),
       };
     });
   }, []);
@@ -82,8 +84,10 @@ export default function Home() {
         <main className="bg-white p-4 w-auto mt-[5rem] md:w-[30rem] shadow-2xl flex flex-col justify-center border">
           <div className="flex justify-between">
             <div>
-              <h2 className="font-semibold text-[1.3rem]">EP Test Ent.</h2>
-              <p>0540000002</p>
+              <h2 className="font-semibold text-[1.3rem]">
+                {transData.merchant}
+              </h2>
+
               <p>{transData.date}</p>
             </div>
             <div className="flex p-2">
@@ -157,7 +161,9 @@ export default function Home() {
             </table>
           </div>
         </main>
-        <p className="text-center my-9">Powered by Emergent Payments Africa</p>
+        <p className="text-center my-9">
+          Powered by Emergent Payments GH. Contact Us on (+233)302263016
+        </p>
       </section>
     </main>
   );
