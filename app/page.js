@@ -162,7 +162,7 @@ export default function Home() {
           </div>
         </main>
         <p className="text-center my-9">
-          Powered by Emergent Payments GH. Contact Us on (+233)302263016
+          Powered by Emergent Payments GH. Contact Us on 0302263016
         </p>
       </section>
     </main>
