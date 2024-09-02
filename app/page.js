@@ -13,7 +13,7 @@ export default function Home() {
   const [transData, setTransData] = useState({
     trans_ref_no: "",
     name: "",
-    email: "",
+    amount: "",
     mobile: "",
     status_code: "",
     payment_mode: "",
@@ -24,7 +24,7 @@ export default function Home() {
     setTransData(() => {
       return {
         name: searchParams.get("name"),
-        email: searchParams.get("email"),
+        amount: searchParams.get("amount"),
         mobile: searchParams.get("mobile"),
         payment_mode: searchParams.get("payment_mode"),
         status_code: searchParams.get("status_code"),
@@ -142,14 +142,14 @@ export default function Home() {
                 <tr className="text-left">
                   <td>SubTotal</td>
                   <td></td>
-                  <td className="text-right">GHS {transData.email || ""}</td>
+                  <td className="text-right">GHS {transData.amount || ""}</td>
                 </tr>
                 <tr className="text-[22px] font-semibold">
                   <td className="text-left">Total</td>
                   <td></td>
                   <td className="text-right">
                     <span className="text-[17px]">GHS</span>{" "}
-                    {transData.email || ""}
+                    {transData.amount || ""}
                   </td>
                 </tr>
                 <tr className="border-y"></tr>
