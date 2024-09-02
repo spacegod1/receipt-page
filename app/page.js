@@ -161,9 +161,8 @@ export default function Home() {
             </table>
           </div>
         </main>
-        <p className="text-center my-9">
-          Powered by Emergent Payments GH. Contact Us on 0302263016
-        </p>
+        <p className="text-center mt-9">Powered by Emergent Payments GH.</p>
+        <p className="text-center mt-4">Contact Us on 0302263016</p>
       </section>
     </main>
   );
