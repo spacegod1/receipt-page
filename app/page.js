@@ -83,7 +83,7 @@ export default function Home() {
   return (
     <main className="flex justify-center items-center">
       <section className="flex flex-col justify-center items-center px-2">
-        <main className="bg-white p-4 w-auto mt-[5rem] md:w-[30rem] shadow-2xl flex flex-col justify-center border">
+        <main className="bg-white p-4 w-[25rem] mt-[5rem] md:w-[30rem] shadow-2xl flex flex-col justify-center border">
           <div className="flex justify-between">
             <div>
               <h2 className="font-semibold text-[1.3rem]">
