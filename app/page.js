@@ -1,170 +1,172 @@
 "use client";
 
 import Image from "next/image";
-import Logo from "/public/emergent_logo.png";
-import Name1 from "/public/emergent_name.png";
-import { FaCircleCheck } from "react-icons/fa6";
-import { useState, useEffect } from "react";
+import { FaCircleCheck, FaPhone, FaHeadset } from "react-icons/fa6";
+import { useMemo } from "react";
 import { useSearchParams } from "next/navigation";
+
+function getFormattedDate() {
+  const newDate = new Date();
+  const monthNames = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+  ];
+  const month = monthNames[newDate.getMonth()];
+  const day = newDate.getDate();
+  const daySuffix =
+    day % 10 === 1 && day !== 11 ? "st"
+    : day % 10 === 2 && day !== 12 ? "nd"
+    : day % 10 === 3 && day !== 13 ? "rd"
+    : "th";
+  let hours = newDate.getHours();
+  const minutes = String(newDate.getMinutes()).padStart(2, "0");
+  const ampm = hours >= 12 ? "pm" : "am";
+  hours = hours % 12 || 12;
+  return `${month} ${day}${daySuffix} ${newDate.getFullYear()}, ${String(hours).padStart(2, "0")}:${minutes} ${ampm}`;
+}
 
 export default function Home() {
   const searchParams = useSearchParams();
-
-  const [transData, setTransData] = useState({
-    trans_ref_no: "",
-    name: "",
-    amount: "",
-    mobile: "",
-    status_code: "",
-    payment_mode: "",
-    date: "",
-    merchant: "",
-    email: "",
-  });
-
-  useEffect(() => {
-    setTransData(() => {
-      return {
-        name: searchParams.get("name"),
-        amount: searchParams.get("amount"),
-        mobile: searchParams.get("mobile"),
-        email: searchParams.get("email"),
-        payment_mode: searchParams.get("payment_mode"),
-        status_code: searchParams.get("status_code"),
-        trans_ref_no: searchParams.get("trans_ref_no"),
-        date: setDate(),
-        merchant: searchParams.get("merchant"),
-      };
-    });
-  }, []);
-
-  const setDate = function () {
-    const newDate = new Date();
-    const year = newDate.getFullYear();
-
-    const monthNames = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const month = monthNames[newDate.getMonth()];
-
-    const day = newDate.getDate();
-    const daySuffix =
-      day % 10 === 1 && day !== 11
-        ? "st"
-        : day % 10 === 2 && day !== 12
-        ? "nd"
-        : day % 10 === 3 && day !== 13
-        ? "rd"
-        : "th";
-
-    let hours = newDate.getHours();
-    const minutes = String(newDate.getMinutes()).padStart(2, "0");
-
-    const ampm = hours >= 12 ? "pm" : "am";
-    hours = hours % 12 || 12; // Convert to 12-hour format
-    hours = String(hours).padStart(2, "0");
-
-    const dateFormatString = `${month} ${day}${daySuffix} ${year}, ${hours}:${minutes} ${ampm}`;
-
-    return dateFormatString;
-  };
+  const date = useMemo(() => getFormattedDate(), []);
 
   return (
-    <main className="flex justify-center items-center">
-      <section className="flex flex-col justify-center items-center px-2">
-        <main className="bg-white p-4 w-[25rem] mt-[5rem] md:w-[30rem] shadow-2xl flex flex-col justify-center border">
-          <div className="flex justify-between">
-            <div>
-              <h2 className="font-semibold text-[1.3rem]">
-                {transData.merchant}
-              </h2>
+    <main className="min-h-screen flex justify-center items-center bg-[#e8e8e8] py-12 px-4">
+      <section className="w-full max-w-[30rem]">
+        <div className="rounded-2xl shadow-lg overflow-hidden">
+          <div className="bg-white p-6 md:p-8 flex flex-col gap-6">
+          {/* Header */}
+          <div className="flex justify-between items-start">
+            <div className="min-w-0">
+              <h1 className="font-bold text-base md:text-lg text-gray-800 uppercase tracking-tight">
+                {searchParams.get("merchant") || "AFRIKIKO LEISURE LIMITED"}
+              </h1>
+              <p className="text-xs text-gray-500 mt-0.5">{date}</p>
+            </div>
+            <div className="flex items-center shrink-0">
+              <Image
+                src="/full emergent logo.png"
+                alt="Emergent Payments"
+                width={120}
+                height={40}
+                className="h-9 w-auto object-contain"
+                priority
+              />
+            </div>
+          </div>
+          <div className="border-b border-gray-200" />
 
-              <p>{transData.date}</p>
-            </div>
-            <div className="flex p-2">
-              <Image
-                src={Logo}
-                className="h-[2.2rem] w-[2.5rem]"
-                alt="Emergent Payment logo"
-                priority
-              />
-              <Image
-                src={Name1}
-                className="h-[2.2rem] w-[4.7rem]"
-                alt="Emergent Payment brand name"
-                priority
-              />
-            </div>
-          </div>
-          <div className="flex justify-between my-3">
+          {/* Transaction details */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
             <div>
-              <p>Receipt #</p>
-              <p>Customer Number</p>
-              <p>Customer Name</p>
+              <p className="text-gray-400 uppercase text-xs tracking-wide">
+                Receipt #
+              </p>
+              <p className="font-semibold text-gray-800 mt-0.5">
+                {searchParams.get("trans_ref_no") || "—"}
+              </p>
             </div>
             <div>
-              <div className="text-right">
-                <p>{transData.trans_ref_no || ""}</p>
-                <p>{transData.mobile || ""}</p>
-                <p>{transData.name || ""}</p>
-              </div>
+              <p className="text-gray-400 uppercase text-xs tracking-wide">
+                Customer Number
+              </p>
+              <p className="font-semibold text-gray-800 mt-0.5">
+                {searchParams.get("mobile") || "—"}
+              </p>
+            </div>
+            <div>
+              <p className="text-gray-400 uppercase text-xs tracking-wide">
+                Customer Name
+              </p>
+              <p className="font-semibold text-gray-800 mt-0.5 break-words">
+                {searchParams.get("name") || "—"}
+              </p>
             </div>
           </div>
+
+          {/* Transaction status */}
           <div className="flex justify-between items-center">
-            <h3>Status</h3>
-            <div className="flex justify-center items-center py-1 rounded-md gap-1 w-[6rem] bg-[#FF9A00] text-white">
-              <FaCircleCheck />
-              <h3 className="text-[14px]">Success</h3>
-            </div>
+            <span className="text-xs text-gray-400 uppercase tracking-wide">
+              Transaction Status
+            </span>
+            <span
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500 text-white text-sm font-medium"
+              role="status"
+            >
+              <FaCircleCheck className="w-4 h-4" />
+              Success
+            </span>
           </div>
-          <div className="mt-6 text-[0.835rem]">
-            <table className="w-full">
-              <thead className="border-y">
-                <tr>
-                  <th className="text-left">Type</th>
-                  <th>Description</th>
-                  <th className="text-right">Amount</th>
+
+          {/* Transaction items table */}
+          <div className="border-t border-b border-gray-200 pt-4 pb-4">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="text-gray-400 uppercase text-xs tracking-wide">
+                  <th className="text-left py-2 font-medium">Type</th>
+                  <th className="text-left py-2 font-medium">Description</th>
+                  <th className="text-right py-2 font-medium">Amount</th>
                 </tr>
               </thead>
-              <tbody className="text-center">
-                <tr>
-                  <td className="text-left">{transData.email || ""}</td>
-                  <td>{transData.payment_mode || ""}</td>
-                  <td className="text-right">Paid</td>
-                </tr>
-              </tbody>
-              <tfoot className="w-full text-center">
-                <tr className="text-left">
-                  <td>SubTotal</td>
-                  <td></td>
-                  <td className="text-right">GHS {transData.amount || ""}</td>
-                </tr>
-                <tr className="text-[22px] font-semibold">
-                  <td className="text-left">Total</td>
-                  <td></td>
-                  <td className="text-right">
-                    <span className="text-[17px]">GHS</span>{" "}
-                    {transData.amount || ""}
+              <tbody>
+                <tr className="text-gray-800">
+                  <td className="py-2.5 font-medium">Payment</td>
+                  <td className="py-2.5">
+                    {searchParams.get("payment_mode") || "Mobile Money (MTN)"}
+                  </td>
+                  <td className="py-2.5 text-right font-medium">
+                    GHS {searchParams.get("amount") || "0.00"}
                   </td>
                 </tr>
-                <tr className="border-y"></tr>
-              </tfoot>
+              </tbody>
             </table>
           </div>
-        </main>
-        <p className="text-center mt-9">Powered by Emergent Payments GH.</p>
-        <p className="text-center mt-4">Contact Us on 0302263016</p>
+
+          {/* Summary */}
+          <div className="space-y-2 text-sm">
+            <div className="flex justify-between items-center">
+              <span className="text-gray-500">Subtotal</span>
+              <span className="font-medium text-gray-800">
+                GHS {searchParams.get("amount") || "0.00"}
+              </span>
+            </div>
+            <div className="flex justify-between items-baseline pt-1">
+              <span className="text-gray-500 font-medium">Total Amount</span>
+              <span className="font-bold text-lg text-black">
+                GHS {searchParams.get("amount") || "0.00"}
+              </span>
+            </div>
+          </div>
+
+          </div>
+
+          {/* Footer – greyish section */}
+          <div className="bg-gray-100 rounded-b-2xl px-6 py-3 text-center shadow-[0_4px_6px_-2px_rgba(0,0,0,0.05)]">
+            <p className="text-gray-400 text-xs">
+              Transaction processed securely. Keep this receipt for your records.
+            </p>
+          </div>
+        </div>
+
+        {/* Powered by + contact footer */}
+        <footer className="mt-8 text-center">
+          <p className="text-gray-400 text-sm">
+            Powered by{" "}
+            <span className="font-semibold text-gray-600">
+              Emergent Payments GH
+            </span>
+          </p>
+          <div className="mt-3 flex items-center justify-center gap-3 text-gray-400 text-sm">
+            <span className="inline-flex items-center gap-1.5">
+              <FaPhone className="w-3.5 h-3.5" />
+              0302263016
+            </span>
+            <span className="h-4 w-px bg-gray-300" aria-hidden />
+            <span className="inline-flex items-center gap-1.5">
+              <FaHeadset className="w-3.5 h-3.5" />
+              Contact Support
+            </span>
+          </div>
+        </footer>
       </section>
     </main>
   );
