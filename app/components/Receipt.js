@@ -1,8 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Logo from "../../public/emergent_logo.png";
-import Name1 from "../../public/emergent_name.png";
 import { FaCircleCheck } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
@@ -39,13 +37,17 @@ export default function Receipt() {
           </div>
           <div className="flex p-2">
             <Image
-              src={Logo}
+              src="/emergent_logo.png"
+              width={40}
+              height={35}
               className="h-[2.2rem] w-[2.5rem]"
               alt="Emergent Payment logo"
               priority
             />
             <Image
-              src={Name1}
+              src="/emergent_name.png"
+              width={75}
+              height={35}
               className="h-[2.2rem] w-[4.7rem]"
               alt="Emergent Payment brand name"
               priority
