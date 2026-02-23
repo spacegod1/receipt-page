@@ -46,9 +46,9 @@ export default function Home() {
               <Image
                 src="/full emergent logo.png"
                 alt="Emergent Payments"
-                width={120}
-                height={40}
-                className="h-9 w-auto object-contain"
+                width={160}
+                height={54}
+                className="h-12 w-auto object-contain"
                 priority
               />
             </div>
